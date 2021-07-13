@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)http://192.168.0.218/bit2021/WEB/WebClientLab/WebClient/WebContent/Ex21_Box_Position.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>Insert title here</title>
+	<style type="text/css">
+		.box {width: 100px ; height: 100px}
+		.box1 {
+			background-color: red;
+			position:static; 
+			left:10px;
+			top:10px;
+		}
+		.box2 {
+			background-color: blue;
+			position:relative; 
+			left:60px;
+			top:10px;
+		}
+		.box3 {
+			background-color: green;
+			position:absolute; 
+			left:60px;
+			top:10px;
+		}
+		.box4 {
+			background-color: yellow;
+			position:fixed;  /* 스크롤링 */
+			right:60px;
+			bottom:10px;
+		}
+		/*
+		relative : 상대적인 , 값을 주게 되면 원래 있던 위치에서 이동
+		fixed : 브라우저를 기준으로 이동된다.
+		absolute : 가장 가까운 포지셔닝이 된 조상(Ancestor)요소가 기준이 되어 위치를 잡는다.
+		
+		* 내생각 : 보통 부모를 relative로 하고 자식을 absolute로 해서 위치를 잡는것 같다
+		*/
+	</style>
+</head>
+<body>
+<div class="box box1">static</div>
+<div class="box box2">relative</div>
+<div class="box box3">absolute</div>
+<div class="box box4">fixed</div>
+
+</body></html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>개발자 필수 태그(암기)</title>
+</head>
+<body>
+<!-- 
+	회원가입, 로그인, 게시판 글쓰기
+ -->
+ 	<h3>로그인</h3>
+ 	<form action="Ex11_Login.jsp" method="post"> <!-- method가 get이면 배/post면 비행기 -->
+ 		ID:<input type="text" name="id"><br>
+ 		PWD:<input type="password" name = "pwd"><br>
+ 		<!-- <input type="submit" value="전송하기"> -->
+ 		<input type="image" src="images/1.jpg">
+ 		<input type="reset" value="취소하기"> <!-- 안갑니다 내리세요!(아이디패스워드 적은거 다 지워짐) -->
+ 		<!-- 
+ 			form 태그는 전송을 담당하는 태그 (클라리언트가 입력한 데이터를 가지고 서버로 가기)
+ 			
+ 			네이버 > 회원가입 요청 > 회원가입 전달 > 정보입력(id,pwd,주소) 
+ 			     > 네이버(서버) 전송 > 전송받은 데이터 처리 > DB > insert
+ 			     
+ 			form 전송 수단(운송) >> <input type="submit" : 출발> 얘네가 필요해(선장)
+ 			1. 배    (method="get")	목적지 주소(action="login.jsp")
+ 			--http://192.168.0.4:8090/WebClient/Ex11_Login.jsp?id=sh&pwd=1007
+ 			--입력한 데이터 노출 >> Ex11_Login.jsp?id=sh&pwd=1007
+ 			--자주 쓰이는곳? 게시판의 글번호 링크
+ 			--<a href="boardcontent.jsp?num=100&category=boad">1번글</a>
+ 			
+ 			2. 비행기 (method="post")
+ 			http://192.168.0.4:8090/WebClient/Ex11_Login.jsp
+ 			>> http 프로토콜 (header) 안에 숨겨서 데이터를 전송
+ 			
+ 			//선장 : submit, reset
+ 			
+ 			1. input type = "submit" 전송
+ 			2. input type = "image" 내부적으로 전송기능을 갖고있음(submit이 숨어있음)
+ 			3. input type = "button" 디자인만 존재 >> 별도의 함수 호출
+ 			   function sub(){ document.form.submit(); }
+ 			   
+ 			
+ 		 -->
+ 	</form>
+</body>
+</html>
