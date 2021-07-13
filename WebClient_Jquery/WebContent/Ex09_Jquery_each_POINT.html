@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	/*
+		javascript
+		1. for(let index in Array){Array[index]}
+		2. Object(JSON) :  for(let key in jsonobj){jsonobj[key]}
+		3. array.forEach(function(currentvalue, index, array){})
+		기타 : map()함수... 등등
+		
+		jquery : each() 반복구문
+		1. $(selector).each(function(){ this의 활용 });
+		2. $(selector).each(function(index){ this의 활용 });
+		3. $(selector).each(function(index element){ element }); = ( array.forEach(function(currentvalue, index, array){}))
+		
+		jquery : $.each()
+		1. $.each(Array or Object, function(){this 활용});
+		2. $.each(Array or Object, function(index){this 활용});
+		3. $.each(Array or Object, function(index, element){element});
+		
+		parameter json객체라면
+		let obj = {name:"홍길동", age:100};
+		$(obj).each(function(key, value){ value를 가지고 놀면돼요 });
+		$.each(obj, function(key, value){ value를 가지고 놀면돼요 })
+		
+	*/
+	$(document).ready(function(){
+		$('p').each(function(){
+			//callback 함수 3번 호출
+			//this >> 각각의 p 태그
+			//$(this) >> 선택자로 this
+			console.log("this : " + $(this).text());
+		});
+		
+		$('p').each(function(index){
+			//callback 함수 3번 호출
+			console.log("index : " + index);
+			console.log(this);
+			
+			//index 활용하기
+			//$(this).attr("id","param-"+index);
+			$(this).attr(	//jquery가 가지고 있는 대부분의 함수는 parameter로 json객체를 받는다
+				{
+					"id":"param-"+index,
+					"style":"color:red"
+				}		
+			)
+		});
+		
+		$('p').each(function(index, element){ //활용도는 이게 가장 많아용
+			console.log("index : " +index);
+			console.log(element);
+			console.log("element : " + $(element).text());
+		});
+		
+		$('#btn').click(function(){
+			alert($('#param-1').text());
+		});
+		
+		/************증말 중요해
+			let arr = ["사과","배"] Array
+			let obj = {} json
+			let arrobj = [{},{},{}] 객체 배열
+		*/
+		
+		let array = [
+			{"name":"naver","link":"www.naver.com"},
+			{"name":"daum","link":"www.daum.net"},
+			{"name":"bit","link":"www.bit.or.kr"}
+		]
+		
+		//문제
+		//$.each(Array or Object, function(index, element){})
+		//활용해서 name 값하고 link 값 출력
+		$.each(array,function(index,obj){
+			//console.log(index);
+			//console.log(obj);	//POINT 객체.속성명 or 객체["속성명"]
+			console.log(obj.name + "/" + obj["link"]);
+		});
+		
+		
+		//$(array).each(function(){});
+		
+		let boardobj = {
+				values:[
+						{no:1, title:"hello world"},
+						{no:2, title:"korea"},
+						{no:3, title:"bit world"}
+					  ],
+				search:"검색"
+		}
+		
+		//1. $.each() 사용해서 no의 값하고 , title 값을 출력하세요
+		$.each(boardobj.values,function(index, obj){
+			console.log(index + "/" + obj.no+","+obj["title"]);
+		});
+		
+		//2. $.each(boardobj) >> key, value 출력
+		$.each(boardobj, function(key, value){
+			console.log(key + '/' +value);
+		});
+		
+		//3. $.each no값, title값, search 값을 출력하세요 (KEY POINT)
+		$.each(boardobj, function(key, value){
+			if(typeof(value) == "object"){ //객체인경우
+				$.each(value, function(index, obj){
+					console.log(index + "/" + obj.no+","+obj["title"]);
+				});
+			}else{ //text인 경우
+				console.log(key + '/' +value);
+			}	
+		});
+	});
+		
+		/*과제중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		$(document).ready(function() {
+			var myphotos = [];
+			var itemList = data.items;
+			
+			$.each(itemList, function(index,obj){
+				myphotos.push(itemList);
+			});
+			
+			$.each.attr('imgs').src = myphotos[0];
+			$.each.
+			
+			$('next').click(function(){
+				if(++imgIdx == myphotos.length){
+					imgIdx = 0;
+				}
+				
+			});
+			
+			$('prv').click(function(){
+				if(imgIdx == 0){
+					imgIdx = myphotos.length-1;
+				}
+				
+			});
+			
+			$.each(data, function(key, value){
+				if(typeof(value) == "object"){
+					$.each(value, function(index, obj){
+						console.log(index + "/" + itemList);
+					});
+				}else{
+					console.log(key + "/" + value);
+				}
+			});
+			
+		});
+		*/
+	</script>
+</head>
+<body>
+	<p>java</p>
+	<p>jsp</p>
+	<p>oracle</p>
+	<input type="button" value="전송" id="btn">
+</body>
+</html>

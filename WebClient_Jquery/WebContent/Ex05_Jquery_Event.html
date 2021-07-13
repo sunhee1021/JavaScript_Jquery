@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	/*
+		Jquery 다중 이벤트 처리 (on, off) : 처리하는 코드가 !!![JSON 객체]!!! 형식을 지원
+		2.x.x 버전까지는 동적이벤트 처리 >> bind(), unbind()
+		3.x.x on(). off() 별도의 제작
+		
+	*/
+	
+	
+	$(function(){
+	//$('p').click(){}
+	//$('p').mouseenter(){}
+	
+	$('p').on(	//이벤트 추가하기 (JSON 객체로 사용하면)
+				//***함수의 parameter로 json 객체를 사용하겠다
+				{
+					mouseleave:function(){ $(this).css('background-color',"red")},
+					click:function(){ $(this).css('background-color',"green")},
+					mouseenter:function(){ $(this).css('background-color',"blue")}
+				}	
+	); //이 괄호가 함수의 괄호
+	$('button').click(function(){
+		$('p').off('click');    //click 기능을 제거해라
+	})
+	});
+	
+	</script>
+</head>
+<body>
+	<p>on 함수를 사용해서 다중 이벤트 처리하기</p>
+	<hr>
+	<button>이벤트 제거</button>
+</body>
+</html>

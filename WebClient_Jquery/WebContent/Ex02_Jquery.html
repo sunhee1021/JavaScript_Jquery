@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- 버전 낮춤 3.6.0->3.5.1 -->
+	<script type="text/javascript">
+	/*	
+	window.onload = function(){
+			//body안에 있는 모든 객체가 dom객체로 로딩이 끝난 다음에 익명함수를 실행하겠다.
+			document.getElementById("btn").onclick = function(){
+				alert("DOM Script");
+				//기존방식
+			}
+		}
+	*/
+	
+	
+	$(document).ready(function(){ //jquery가 document객체를 파라미터로 받음
+								  //document객체가 dom으로 다올라오면 ready이벤트 실행(=window.onload)
+		$('#btn').click(function(){
+			//alert("DOM Jquery");
+			$(this).hide(); //여기서 말한 this는 이벤트를 건 객체 =button (= button을 감추어라)
+		})
+	});
+	
+
+	</script>
+</head>
+<body>
+	<input type="button" id="btn" value="버튼">
+</body>
+</html>
