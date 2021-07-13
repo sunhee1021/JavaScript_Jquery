@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		동기/비동기 개념부터 제대로 잡자
+	  1. XMLHttpRequest 객체 얻기
+	  2. onreadystatechange 이벤트 핸들러 구현 (함수) 
+		-이벤트와 이벤트핸들러 차이
+		-이벤트는 웹사이트를 방문한 사용자가 수행하는 동작을 의미하며
+		-이벤트핸들러는 이러한 동작이 발생할 경우 처리할 실제 내용을 의미합니다
+	  3. 요청 정보 ( open() )
+	  4. 요청 보내기 (send() )
+	  5. 응답 처리 (Text(JSON), xml )
+	  */	
+	var httpReq = null;
+	
+	function getInstance(){
+		 if(window.XMLHttpRequest){
+			 httpReq = new XMLHttpRequest(); //현재 브라우져 XMLHttpRequest 내장
+			 //
+		  }else if(window.ActiveXObject){ //IE6 이하   //지금 필요없어요
+			  httpReq = new ActiveXObject("Msxml2.XMLHTTP");
+		  }else{
+			 throw new Error("AJAX 지원하지 않습니다"); 
+		  }
+		 return httpReq; //주소값을 return 
+	}
+	
+	function handlerStateChange(){
+		if(httpReq.readyState == 4){   // 1.서버에서 응답이 왔다면
+			if(httpReq.status >= 200 && httpReq.status < 300){ // 2.서버에서 응답이 왔고 상태가 정상이라면 (200-299)
+				 document.getElementById("container").innerHTML = httpReq.responseText;
+				//httpReq.responseText 서버가 보낸 데이터
+			}else{
+				alert("status Text : " + httpReq.status);   //뭐가 문제인지 확인
+			}
+		}
+	}
+	
+	function sendData(){
+		httpReq = getInstance();
+		httpReq.onreadystatechange = handlerStateChange; // () -> x 괄호가 없어!!!!!!!!
+		httpReq.open("GET","Ex01_Server.html");     //form 태그 구성하고 똑같음
+		httpReq.send();                             //form 태그 안에 submit 버튼 클릭한거랑 같음
+	}
+	
+	</script>
+</head>
+<body>
+	<h3>update a web page without reloading the page</h3>
+	<img src="images/1.jpg" style="width: 150px; height: 150px">
+
+	<h3>비동기(Ajax) 요청 처리</h3>
+	<input type="button" value="비동기처리" onclick="sendData()">
+	<div id="container">First Data load .....</div>
+
+	<h3>동기식 데이터 처리</h3>
+	<a href="Ex01_Server.html">데이터 요청(동기식으로...)</a>
+</body>
+</html>
