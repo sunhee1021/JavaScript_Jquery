@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		let myObj = {name :"john", age:30, city:"seoul"};
+		console.log(myObj);
+	
+		//객체 데이터를 문자열 데이터
+		//login.jsp?name=john&age=30&city=seoul
+		let Stringobj = JSON.stringify(myObj); //POINT	이 함수를 사용하면 객체를 문자열로 (JSON은 내장함수)
+		console.log(Stringobj);
+		console.log(typeof(Stringobj));
+		
+		//[문자열 데이터]를 [객체 데이터] (단 조건...구조) 
+		let myObj2 = '{"name" :"john", "age":30, "city":"seoul"}';  //밖을 '' 이걸로 묶으면 객체가 아니라 문자열임
+		console.log(typeof(myObj2));
+		let myjson = JSON.parse(myObj2); //stringify랑 반대되는 함수, 이 함수를 쓸때는 name, age, city에 ""로 감싸줘야함
+		console.log(typeof(myjson));
+		
+		console.log(myjson.name);			//객체.속성명
+		console.log(myjson["name"]);      //hashmap 처럼 되어있어서 key값 / 배열처럼도 쓸수 있어요 객체["문자열로 속성명"]-""잊지말자
+
+		/*
+		확장자
+		index.htm, index.html
+		css > common.css
+		javascript > common.js
+		json > common.json >> MIME >> application/json
+		xml > common.xml
+		
+		*/
+		
+		let myCars;
+		myCars = {
+				"name" : "john",
+				"age" : 30,
+				"cars" : [
+					{"name" : "Ford","model" : ["Fiesta","Focus","Mustang"]},
+					{"name" : "BMW","model" : ["320","x3","x5"]},
+					{"name" : "Fiat","model" : ["500","Panda"]},
+					
+				]
+		}
+		//차량이름 하고 모델명을 추출
+		//개선된 for문 으로
+		
+		for(let index in myCars.cars){
+			console.log(myCars.cars[index]);
+			document.write("차량이름 : " +myCars.cars[index].name);
+			for(let i in myCars.cars[index].model){
+				console.log(myCars.cars[index].model);
+				document.write("차량모델 : " +myCars.cars[index].model[i]);
+
+			}
+			document.write("<hr>");
+		}
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

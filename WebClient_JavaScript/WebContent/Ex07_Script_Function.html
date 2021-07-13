@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		//function call(){}
+		//myfun = function(){}
+		
+		//function(){} **익명함수 (이름이 없어요)
+		//함수는 호출 >> 몇번이고 >> 필요하다면 재호출 가능
+		//
+		
+		//callback함수 (프로그램 논리(흐름)에 의해 자동으로 호출되는 함수) >> 1초마다 >> 재호출 >> 익명함수
+		//저는요 function aa(){} >> setInterval(aa(), 1000); 이렇게 쓰고싶은데 맞나요?
+		//맞음 
+		//그치만 굳이 밑에처럼 쓰는건 이 익명함수는 setInterval할때만 쓸거라는 의미(setInterval만쓰고 버릴거임)
+		var myTime = setInterval(function(){ //1초단위 function() 강제호출
+ 			let d = new Date(); //java : Date d = new Date()
+ 			let t = d.toLocaleTimeString();
+			document.getElementById("time").innerHTML = t;
+		},1000); 
+		
+		//myTime === setInterval
+		function myTimeStop(){
+			window.clearInterval(myTime);
+		//mytype와 interval은 같은 의미
+		}
+		
+	</script>
+</head>
+<body>
+	<p id="time"></p>
+	<button onclick="myTimeStop()">stop Time</button>
+	
+	
+</body>
+</html>

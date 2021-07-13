@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOM 을 사용하는 javascript</title>
+	<script type="text/javascript">
+	function print(){
+		let ele = document.getElementById("demo");
+		console.log(ele);	//<p id="demo">demo라는 id는 p태그의 식별자</p> 
+		ele.innerHTML="졸립다...";
+		/* innerHTML = element 내에 포함 된 HTML또는 XML 마크업을 가져오거나 설정
+		 innerHTML=" "       
+		: 예를 가지고 이해하는 것이 빠르다. 
+			예를 들어 HTML로 [홍길동]이라는 콘텐츠를 화면에 출력하였다.
+			이 HTML 요소에 접근하여 [홍길동]을 [이순신]으로 바꿔 출력하게 만들려면 이 속성을 사용해야 한다. 
+			그리고 HTML 요소에 접근하려면 document.getElementById 메서드를 함께 사용한다.
+		*/
+		
+	}
+	</script>
+</head>
+<body>
+	<button onclick="print()">클릭하세요</button>
+	<p id="demo">demo라는 id는 p태그의 식별자</p> 
+</body>
+</html>

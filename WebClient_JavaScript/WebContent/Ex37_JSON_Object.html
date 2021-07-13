@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>KEY POINT</title>
+	<script type="text/javascript">
+		//1. 배열 >> [] >> let arr = []; 데이터를 넣을때는 push()함수, 데이터를 뺄때는 pop()함수
+		//2. JSON 객체를 만드는 방법은 {} 중괄호 블럭을 쓴다 >> let obj = {};  접근방법은 객체.속성명 or 객체.함수명 으로 한다.
+		
+		//우리가 원하는 데이터는 단순하지 않다
+		//날씨, 영화정보, 지하철정보 데이터 ...에서 원하는 정보를 추출하려면
+		// ->객체와 객체 or 객체 안의 배열 or 배열안의 객체 이렇게 혼재되어있다 (객체 하나로만 이뤄져 있지 않음 (=복잡))
+		//Car[] car = {new Car()};
+		
+		let students=[];
+		students.push({이름: "홍길동", 국어:80,영어:60});
+		students.push({이름: "아무개", 국어:100,영어:50});
+		students.push({이름: "이순신", 국어:10,영어:100});
+		
+		//[{},{},{}]
+		//기존에 만들어진 객체에다가 함수를 추가 할 수 있다 
+		for(let index in students){
+		//	students[index] > {} > add할수있다 필요한 함수를
+		students[index].getSum = function(){return this.국어 + this.영어;}
+		students[index].getAvg = function(){return this.getSum()/2;}
+		}
+		
+		console.log(students);
+		
+		for(let index in students){
+			console.log(students[index].이름);
+			console.log(students[index].getSum());
+			console.log(students[index].getAvg());
+		}
+		
+	</script>
+</head>
+<body>
+
+</body>
+</html>

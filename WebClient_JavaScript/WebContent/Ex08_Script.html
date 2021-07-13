@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		/*
+			유효성 검증
+			검증을 누가? (서버가 할수도 있고 클라이언트가 할수도 있지)
+			
+			사이트 접속(bit.or.kr) >> 회원가입 버튼 클릭 >> 회원가입 화면 보이고 있어요
+			사이트에 접속한 사람 = client
+			
+			1. client >> 회원가입 데이터 입력(id,pwd) >> 서버로 전송 >> 서버가 값을 받아요 >> 서버가 검증을 하고
+			>> client한테 응답(너 비밀번호에 특수문자 없엉)
+			
+			2. client >> 회원가입 데이터 입력(id,pwd) >> 전송(X) >> 검증(javaScript)가 함 >> 검증 끝나면
+			>> 서버로 전송
+			
+			//검증 : 글자 개수, 특수문자 표기 ...
+			어떤게 더 좋을까? 답은 2번
+			왜?
+			서버에 접속 횟수가 증가(네트워크 트래픽 증가(라운트 트림) : 통신횟수가 늘어난다) -> 좋지않음
+			
+			>>최대한 Client가 할수 있는 모든 검증은 Client에서 처리 (javaScript)
+			
+			---------------------------------------------------------------------------------
+			ID 중복 검사 (서버 통신) >> ID 입력 >> 서버(DB안에 ...)
+			-> 이경우에는 서버 통신을 해야함!!!!!!!!!!!!!!!
+			---------------------------------------------------------------------------------
+			
+		*/
+		
+		function send(){
+				//유효성 검증 하고 >> 문제가 없다면 >> 서버로 전송하고
+				//            >> 문제가 있다면(원하는 값이 아니라면) >> 재입력 요청
+				
+				//1. 요소(elements)의 정보를 가지고 와야 한다.
+				//   var ele = document.forms[0].elements[0].value
+								//forms 폼들! 이렇게 안쓰려면 밑에처럼(loginform) 이름을 쓰면 된다고 했음
+				//최종적으로는 : DOM을 사용할거임
+				
+				let inputuserid = document.loginform.txtuserid;
+				//inputuserid == <input type="text" name="txtuserid">
+				console.log(inputuserid);
+				console.log(inputuserid.value);
+				
+				//DOM을 사용한다면 (조건 : 태그의 식별자가 id가 되어야 함)
+				let userpwd = document.getElementById("txtpwd");
+				console.log(userpwd);
+				console.log(userpwd.value);
+				
+				//그 다음 검증 로직(개발자 마음)
+				//1. 입력 했는지
+				//2. 입력한 값이 ... 로직에 맞는지
+				if(inputuserid.value == "" || !(inputuserid.value.length >= 3 
+						&& inputuserid.value.length <= 10)){
+					alert("다시입력하세용");
+					document.loginform.txtuserid.focus(); //focus -> 잘못입력하면 다시입력하라고 블럭이 잡힘
+					inputuserid.select(); //선택(블럭)
+				}else{
+					alert("검증 완료");
+					//서버로 전송할거야, 그런데 서버 주소가 필요하잖아......?
+					//form action="주소" method=""
+					
+					document.loginform.action="Ex08_login.jsp";
+					document.loginform.submit(); //form 태그에 내장된 함수가 있음 (전송)
+				}
+				
+			}
+		
+	</script>
+</head>
+<body>
+		<form action="" method="get" name="loginform">
+			ID : <input type="text" name ="txtuserid">
+			PWD : <input type="password" name ="txtpwd" id="txtpwd">
+			<input type="button" value="전송" onclick="send()">
+			<!-- 
+				type="submit" ->submit,image 는 내부적으로 이벤트가 들어있음
+				type="image" 
+				type="button" onclick="" -> 이경우에는 이벤트를 걸어야함(onclick 으로), 함수에서 전송처리
+				
+				submit, image 는 내부적으로 이벤트가 들어 있음 button은 내부적으로 이벤트가 없기때문에 이벤트를 걸어야함
+			 --> 
+		
+		</form>
+</body>
+</html>
